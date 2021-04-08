@@ -1,0 +1,7 @@
+Efectura.API/bin
+Efectura.API/obj
+Efectura.Data/bin
+Efectura.Data/obj
+.idea
+.vs
+git rm -r --cached bin
