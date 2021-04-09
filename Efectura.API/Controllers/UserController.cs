@@ -21,8 +21,6 @@ namespace Efectura.API.Controllers
         {
             _context = context;
         }
-
-
         // GET: api/<UserController>
         [HttpGet]
         public async Task<IEnumerable<Consumer>> Get()
@@ -30,16 +28,14 @@ namespace Efectura.API.Controllers
             var consumer = _context.Consumers.ToList();
             return await Task.FromResult(consumer);
         }
-
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public async Task<Consumer> Get(int id)
+        public async Task<Consumer> Get(double id)
         {
             var consumer = _context.Consumers.FirstOrDefault(x => x.TCKN == id);
             return await Task.FromResult(consumer);
 
         }
-
         // POST api/<UserController>
         [HttpPost]
         public string Post(Consumer model)
@@ -52,7 +48,9 @@ namespace Efectura.API.Controllers
                 consumer.SurName = model.SurName;
                 consumer.Adress = model.Adress;
                 consumer.BirthDate = model.BirthDate;
-                consumer.TCKN = creator.Creator();
+                consumer.CreateDate = DateTime.Now;
+                consumer.ChangeDate = DateTime.Now;
+                consumer.TCKN= creator.Creator();
                 _context.Consumers.Add(consumer);
                 _context.SaveChanges();
                 return consumer.TCKN.ToString() + " Saved";
@@ -63,10 +61,9 @@ namespace Efectura.API.Controllers
                 return e.Message;
             }
         }
-
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(Consumer model,int id)
+        public void Put(Consumer model,double id)
         {
             var consumer = _context.Consumers.FirstOrDefault(x => x.TCKN == id);
             if (consumer != null)
@@ -75,18 +72,14 @@ namespace Efectura.API.Controllers
                 consumer.SurName = model.SurName;
                 consumer.BirthDate = model.BirthDate;
                 consumer.Adress = model.Adress;
-                consumer.ChangeDate = model.ChangeDate;
+                consumer.ChangeDate = DateTime.Now;
                 _context.Consumers.Update(consumer);
                 _context.SaveChanges();
             }
-
-           
-
         }
-
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public ActionResult<Consumer> Delete(int id)
+        public ActionResult<Consumer> Delete(double id)
         {        
             try
             {

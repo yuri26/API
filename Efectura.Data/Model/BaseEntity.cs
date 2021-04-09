@@ -9,9 +9,8 @@ namespace Efectura.Data.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        private DateTime date = DateTime.Now;
-        public DateTime CreateDate { get { return date; } set { date = value; } }
-        public DateTime ChangeDate { get { return date; } set { date = value; } }
+        public DateTime CreateDate { get; set; }
+        public DateTime ChangeDate { get; set; }
 
     
 }
